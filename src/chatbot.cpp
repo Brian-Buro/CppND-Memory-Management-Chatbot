@@ -50,7 +50,8 @@ ChatBot::ChatBot(const ChatBot &source)
     _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
     _currentNode = source._currentNode;
-    _image = source._image;
+    _image = new wxBitmap;
+    *_image = *source._image;
 }
 
 ChatBot &ChatBot::operator=(const ChatBot &source)
@@ -63,7 +64,8 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
     _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
     _currentNode = source._currentNode;
-    _image = source._image;
+    _image = new wxBitmap;
+    *_image = *source._image;
     return *this;
 }
 
@@ -72,14 +74,12 @@ ChatBot::ChatBot(ChatBot &&source)
     std::cout << "ChatBot Move Constructor" << std::endl;
     // Copy property pointers to new Chatbot
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
     _currentNode = source._currentNode;
     _image = source._image;
-    // Delete property pointers in old Chatbot
-    source._chatLogic = nullptr;
-    source._rootNode = nullptr;
-    source._currentNode = nullptr;
-    source._image = nullptr;
+    // Delete heap pointers in old Chatbot
+    source._image = NULL;
 }
 
 ChatBot &ChatBot::operator=(ChatBot &&source)
@@ -91,14 +91,12 @@ ChatBot &ChatBot::operator=(ChatBot &&source)
     }
     // Copy property pointers to new Chatbot
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
     _currentNode = source._currentNode;
     _image = source._image;
-    // Delete property pointers in old Chatbot
-    source._chatLogic = nullptr;
-    source._rootNode = nullptr;
-    source._currentNode = nullptr;
-    source._image = nullptr;
+    // Delete heap pointers in old Chatbot
+    source._image = NULL;
     return *this;
 }
 ////
