@@ -12,9 +12,6 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    //The chatlogic will be responsible for the _chatBot
-    //delete _chatBot; 
-
     ////
     //// EOF STUDENT CODE
 }
@@ -45,7 +42,6 @@ void GraphNode::MoveChatbotHere(ChatBot chatBot)
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
     newNode->MoveChatbotHere(std::move(_chatBot));
-    //_chatBot = NULL; // invalidate pointer at source
 }
 ////
 //// EOF STUDENT CODE
